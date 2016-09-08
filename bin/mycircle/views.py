@@ -2,7 +2,7 @@ from datetime import datetime
 from flask import render_template, flash, redirect, session, url_for, request, g 
 from flask.ext.login import login_user, logout_user, current_user, login_required 
 from mycircle import app, db, lm, oid 
-from .forms import EditForm 
+from .forms import EditForm, ContactForm 
 from .models import User
 
 @app.route('/')
@@ -100,3 +100,21 @@ def edit():
         form.username.data = g.user.username
         form.about_me.data = g.user.about_me
     return render_template('edit.html', form=form)
+    
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    form = ContactForm()
+   
+    if request.method == 'POST':
+        if form.validate() == False:
+        flash('All fields are required.')
+        return render_template('contact.html', form=form)
+    else:
+        msg = Message(form.subject.data, sender='contact@example.com', recipients=['your_email@example.com'])
+        msg.body = """
+        From: %s &lt;%s&gt;
+        %s
+        """ % (form.name.data, form.email.data, form.message.data)
+        mail.send(msg)
+ 
+    return render_template('contact.html', success=True)
