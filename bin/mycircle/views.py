@@ -3,8 +3,9 @@ from datetime import datetime
 from flask import render_template, flash, redirect, session, url_for, request, g 
 from flask.ext.login import login_user, logout_user, current_user, login_required 
 from mycircle import app, db, lm, oid 
-from .forms import EditForm, libraryForm 
+from .forms import EditForm, libraryForm , ContactForm
 from .models import User , Library
+
 
 @app.route('/')
 @app.route('/index')
@@ -168,4 +169,26 @@ def library(nickname):
     #    return redirect(url_for('index'))
     library = Library.query.filter_by(user_id=user.id).all()
     return render_template('library.html',user=user,library=library)
-    
+  
+   
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    form = ContactForm()
+ 
+    if request.method == 'POST':
+        if form.validate() == False:
+            flash('All fields are required.')
+            return render_template('contact.html', form=form)
+        else:
+            msg = Message(form.subject.data, sender='contact@example.com', recipients=['your_email@example.com'])
+            msg.body = """
+            From: %s &lt;%s&gt;
+            %s
+            """ % (form.name.data, form.email.data, form.message.data)
+            mail.send(msg)
+ 
+            return render_template('contact.html', success=True)
+ 
+    elif request.method == 'GET':
+        return render_template('contact.html', form=form)
+
