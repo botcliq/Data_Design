@@ -1,0 +1,41 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Edit Your library</h1>
+  <form action="" method="post" name="editlibrary">
+      {{form.hidden_tag()}}
+      <table>
+          <tr>
+              <td>Add to Library:</td>
+              <td>{{ form.name(size=24) }}
+	          {% for error in form.errors.name %}
+                  <br><span style="color: red;">[{{ error }}]</span>
+                  {% endfor %}
+	      </td>  
+          </tr>
+          <tr>
+              <td>About book:</td>
+              <td>{{ form.body(cols=32, rows=4) }}</td>
+          </tr>
+          <tr>
+	  <tr>
+              <td>Genre:</td>
+              <td>{{ form.type(cols=32, rows=1) }}</td>
+          </tr>
+          <tr>
+	  <tr>
+              <td>Author:</td>
+              <td>{{ form.body(cols=32, rows=1) }}</td>
+          </tr>
+          <tr>
+	  <tr>
+              <td>Number of book:</td>
+              <td>{{ form.no_of_books(size=4) }}</td>
+          </tr>
+              <td></td>
+              <td><input type="submit" value="Save Changes"></td>
+          </tr>
+      </table>
+  </form>
+{% endblock %}

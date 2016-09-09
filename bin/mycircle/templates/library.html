@@ -22,7 +22,11 @@
       </tr>
   </table>
   <hr>
-  {% for post in posts %}
-      {% include 'post.html' %}
-  {% endfor %}
+   <ul>{% for library1 in library%}
+	
+      <li>{{ library1.id }}
+	{{ library1.name }}
+	{{ library1.type }}</li>
+   {% endfor %}
+   </ul>
 {% endblock %}
