@@ -3,3 +3,9 @@
     padding: 0;
     list-style: none;
 }
+
+<!-- Add additional CSS in static file --> 
+{% load static %} 
+<link rel="stylesheet" href="{% static "catalog/css/styles.css" %}">
+
+
