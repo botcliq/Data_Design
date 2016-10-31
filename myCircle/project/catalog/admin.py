@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Author, Genre, Book, BookInstance, display_genre
+from .models import Author, Genre, Book, BookInstance, display_genre  
 # Register your models here.
 
 #Define the admin class
@@ -21,6 +21,7 @@ class BookAdmin(admin.ModelAdmin):
 
 @admin.register(BookInstance)
 class BookInstanceAdmin(admin.ModelAdmin):
+   list_display = ('book','status','borrower','due_back','id')
    list_filter = ('status','due_back')
 
 #class BooksInstanceInline(admin.TabularInline):
