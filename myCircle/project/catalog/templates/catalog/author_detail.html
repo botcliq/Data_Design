@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Title: {{ book.author }}</h1>
+  <p><strong>First Name:</strong> <a href="">{{ book.author }}</a></p> <!-- author detail link not yet defined -->
+  <p><strong>Last Name:</strong> {{ book.summary }}</p>
+  <p><strong>Date of Birth:</strong> {{ book.isbn }}</p> 
+  <p><strong>Date of Death:</strong> {{ book.language }}</p>  
+{% endblock %}
