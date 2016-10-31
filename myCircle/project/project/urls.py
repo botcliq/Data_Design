@@ -23,6 +23,7 @@ urlpatterns = [
 from django.conf.urls import include
 urlpatterns += [
 	url(r'^catalog/', include('catalog.urls')),
+	url(r'^accounts/', include('django.contrib.auth.urls')),
 ]
 
 
